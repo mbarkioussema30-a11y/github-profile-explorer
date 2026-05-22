@@ -1,0 +1,21 @@
+{% extends "explorer/base.html" %}
+
+{% block title %}
+    Error
+{% endblock %}
+
+{% block content %}
+
+    <h1 style="color: #d1242f;">Something went wrong</h1>
+
+    <p style="text-align: center;">
+        {{ error_message|default:"An unexpected error occurred. Please try again later." }}
+    </p>
+
+    <p style="text-align: center;">
+        <a href="{% url 'search' %}">
+            Back to search
+        </a>
+    </p>
+
+{% endblock %}

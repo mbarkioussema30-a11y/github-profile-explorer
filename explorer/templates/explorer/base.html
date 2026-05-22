@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+            GitHub Explorer
+        {% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="{% static 'explorer/css/style.css' %}">
+</head>
+<body>
+
+    <div class="app-shell">
+
+        <header class="topbar">
+            <a href="{% url 'search' %}" class="brand">
+                <span class="brand-icon">⌘</span>
+                GitHub Explorer
+            </a>
+
+            <span class="topbar-badge">
+                Django + GitHub API
+            </span>
+        </header>
+
+        <main class="container">
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        <footer class="footer">
+            Built with Django · GitHub Public API
+        </footer>
+
+    </div>
+
+</body>
+</html>

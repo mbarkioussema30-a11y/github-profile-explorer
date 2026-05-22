@@ -1,0 +1,27 @@
+{% extends "explorer/base.html" %}
+
+{% block title %}
+    GitHub Profile Search
+{% endblock %}
+
+{% block content %}
+
+    <h1>GitHub Profile Search</h1>
+
+    <p style="text-align: center;">
+        Enter a GitHub username to explore the profile.
+    </p>
+
+    <form method="get">
+        <!-- Text input for the GitHub username -->
+        <input type="text" name="username" placeholder="Example: octocat">
+
+        <!-- Submit button -->
+        <button type="submit">Search</button>
+    </form>
+
+    {% if error_message %}
+        <p class="error">{{ error_message }}</p>
+    {% endif %}
+
+{% endblock %}

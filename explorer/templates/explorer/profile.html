@@ -1,0 +1,217 @@
+{% extends "explorer/base.html" %}
+
+{% block title %}
+    GitHub Profile Explorer
+{% endblock %}
+
+{% block content %}
+
+    <a class="back-link" href="{% url 'search' %}">← Back to search</a>
+
+    {% if section == "profile" %}
+        <h1>GitHub Profile</h1>
+    {% elif section == "repos" %}
+        <h1>Repositories of {{ username }}</h1>
+    {% elif section == "followers" %}
+        <h1>Followers of {{ username }}</h1>
+    {% endif %}
+
+    {% if rate_limit %}
+        <p class="rate-limit">
+            GitHub API requests remaining:
+            <strong>{{ rate_limit.remaining }}</strong> /
+            {{ rate_limit.limit }}
+
+            {% if rate_limit.reset_minutes is not None %}
+                <br>
+                Reset in about {{ rate_limit.reset_minutes }} minutes.
+            {% endif %}
+        </p>
+    {% endif %}
+
+    {% if error_message %}
+        <p class="error">{{ error_message }}</p>
+    {% endif %}
+
+
+    {% if section == "profile" %}
+
+        {% if profile %}
+            <div class="profile-card">
+
+                <img class="avatar" src="{{ profile.avatar_url }}" alt="GitHub avatar">
+
+                <h2 style="text-align: center;">
+                    {{ profile.name|default:profile.login }}
+                </h2>
+
+                <p>
+                    <strong>Username:</strong>
+                    {{ profile.login }}
+                </p>
+
+                <p>
+                    <strong>Bio:</strong>
+                    {{ profile.bio|default:"No bio available" }}
+                </p>
+
+                <p>
+                    <strong>Location:</strong>
+                    {{ profile.location|default:"No location available" }}
+                </p>
+
+                {% for stat in profile_stats %}
+                    <p>
+                        <strong>{{ stat.label }}:</strong>
+                        {{ stat.value }}
+                    </p>
+                {% endfor %}
+
+                <p>
+                    <strong>Joined GitHub:</strong>
+                    {{ profile.created_at }}
+                </p>
+
+                <p>
+                    <a href="{{ profile.html_url }}" target="_blank">
+                        View profile on GitHub
+                    </a>
+                </p>
+
+                <p>
+                    <a href="{% url 'repos' profile.login %}">
+                        View public repositories
+                    </a>
+                </p>
+
+                <p>
+                    <a href="{% url 'followers' profile.login %}">
+                        View followers
+                    </a>
+                </p>
+
+            </div>
+        {% endif %}
+
+
+    {% elif section == "repos" %}
+
+        <p>
+            <a href="{% url 'profile' username %}">← Back to profile</a>
+        </p>
+
+        {% if language_breakdown %}
+            <div class="language-card" style="margin-bottom: 30px;">
+                <h2>Language Breakdown</h2>
+
+                {% for item in language_breakdown %}
+                    <p>
+                        <strong>{{ item.language }}:</strong>
+                        {{ item.percentage }}%
+                    </p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if repos %}
+            {% for repo in repos %}
+                <div class="repo-card">
+
+                    <h2>
+                        <a href="{{ repo.html_url }}" target="_blank">
+                            {{ repo.name }}
+                        </a>
+                    </h2>
+
+                    <p>
+                        {{ repo.description|default:"No description available" }}
+                    </p>
+
+                    <p class="small-info">
+                        Language: {{ repo.language|default:"Not specified" }}
+                        |
+                        Stars: {{ repo.stars }}
+                        |
+                        Forks: {{ repo.forks }}
+                    </p>
+
+                </div>
+            {% endfor %}
+
+            <div class="pagination">
+
+                {% if pagination.has_prev %}
+                    <a href="?page={{ previous_page }}">← Previous</a>
+                {% else %}
+                    <span></span>
+                {% endif %}
+
+                <span>Page {{ page }}</span>
+
+                {% if pagination.has_next %}
+                    <a href="?page={{ next_page }}">Next →</a>
+                {% else %}
+                    <span></span>
+                {% endif %}
+
+            </div>
+
+        {% else %}
+            {% if not error_message %}
+                <p>No repositories found.</p>
+            {% endif %}
+        {% endif %}
+
+
+    {% elif section == "followers" %}
+
+        <p>
+            <a href="{% url 'profile' username %}">← Back to profile</a>
+        </p>
+
+        {% if followers %}
+            <div class="followers-grid">
+
+                {% for follower in followers %}
+                    <div class="follower-card">
+
+                        <img class="avatar" src="{{ follower.avatar_url }}" alt="Follower avatar">
+
+                        <p>
+                            <a href="{{ follower.html_url }}" target="_blank">
+                                {{ follower.login }}
+                            </a>
+                        </p>
+
+                    </div>
+                {% endfor %}
+
+            </div>
+
+            <div class="pagination">
+
+                {% if pagination.has_prev %}
+                    <a href="?page={{ previous_page }}">← Previous</a>
+                {% else %}
+                    <span></span>
+                {% endif %}
+
+                <span>Page {{ page }}</span>
+
+                {% if pagination.has_next %}
+                    <a href="?page={{ next_page }}">Next →</a>
+                {% else %}
+                    <span></span>
+                {% endif %}
+
+            </div>
+
+        {% else %}
+            {% if not error_message %}
+                <p>No followers found.</p>
+            {% endif %}
+        {% endif %}
+
+    {% endif %}
+
+{% endblock %}
