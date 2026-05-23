@@ -6,6 +6,10 @@ from .services import (
     get_language_breakdown_for_repos,
     get_github_rate_limit,
 )
+from django.contrib import messages
+from django.utils.dateparse import parse_datetime
+
+from .models import SavedGitHubProfile
 
 def search_view(request):
     # Get the username from the search form
@@ -161,3 +165,40 @@ def followers_view(request, username):
     }
 
     return render(request, "explorer/profile.html", context)
+def save_profile_view(request, username):
+    # Only POST requests can save data
+    if request.method != "POST":
+        return redirect("profile", username=username)
+
+    # Get the profile from GitHub API again before saving
+    status_code, profile, error_type = get_github_profile(username)
+
+    if error_type or not profile:
+        messages.error(request, "Could not save this profile. Please try again.")
+        return redirect("profile", username=username)
+
+    # Convert GitHub created_at string to Python datetime
+    github_created_at = None
+
+    if profile.get("created_at"):
+        github_created_at = parse_datetime(profile.get("created_at"))
+
+    # Create the profile if it does not exist, update it if it exists
+    SavedGitHubProfile.objects.update_or_create(
+        login=profile.get("login"),
+        defaults={
+            "avatar_url": profile.get("avatar_url"),
+            "name": profile.get("name"),
+            "bio": profile.get("bio"),
+            "location": profile.get("location"),
+            "followers": profile.get("followers") or 0,
+            "following": profile.get("following") or 0,
+            "public_repos": profile.get("public_repos") or 0,
+            "github_created_at": github_created_at,
+            "html_url": profile.get("html_url"),
+        }
+    )
+
+    messages.success(request, f"{profile.get('login')} was saved in the database.")
+
+    return redirect("profile", username=profile.get("login"))
