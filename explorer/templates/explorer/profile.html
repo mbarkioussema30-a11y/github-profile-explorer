@@ -98,12 +98,22 @@
 
                 </div>
 
+                {% if is_saved %}
+                    <p class="saved-badge">
+                        ✅ Already saved in database
+                    </p>
+                {% endif %}
+
                 <div class="save-button-wrapper">
                     <form method="post" action="{% url 'save_profile' profile.login %}" class="save-profile-form">
                         {% csrf_token %}
 
                         <button type="submit" class="save-button">
-                            Save Profile
+                            {% if is_saved %}
+                                Update Saved Profile
+                            {% else %}
+                                Save Profile
+                            {% endif %}
                         </button>
                     </form>
                 </div>
@@ -201,18 +211,20 @@
         </p>
 
         {% if followers %}
-            <div class="followers-grid">
+            <div class="followers-grid modern-followers-grid">
 
                 {% for follower in followers %}
-                    <div class="follower-card">
+                    <div class="follower-card modern-follower-card">
 
-                        <img class="avatar" src="{{ follower.avatar_url }}" alt="Follower avatar">
+                        <img class="follower-avatar" src="{{ follower.avatar_url }}" alt="Follower avatar">
 
-                        <p>
-                            <a href="{{ follower.html_url }}" target="_blank">
-                                {{ follower.login }}
-                            </a>
-                        </p>
+                        <h2 class="follower-username">
+                            @{{ follower.login }}
+                        </h2>
+
+                        <a href="{{ follower.html_url }}" target="_blank" class="follower-button">
+                            View GitHub
+                        </a>
 
                     </div>
                 {% endfor %}

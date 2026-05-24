@@ -39,6 +39,7 @@ def profile_view(request, username):
 
     error_message = None
     profile_stats = []
+    is_saved = False
 
     if error_type == "user_not_found":
         error_message = "GitHub user not found. Please check the username."
@@ -55,24 +56,29 @@ def profile_view(request, username):
     elif error_type == "api_error":
         error_message = "GitHub API error. Please try again later."
 
-    # If profile exists, prepare stats for the template loop
     if profile:
         profile_stats = [
             {"label": "Followers", "value": profile["followers"]},
             {"label": "Following", "value": profile["following"]},
             {"label": "Public repositories", "value": profile["public_repos"]},
         ]
+
+        # Check if this GitHub profile already exists in our database
+        is_saved = SavedGitHubProfile.objects.filter(login=profile["login"]).exists()
+
     rate_limit = get_github_rate_limit()
+
     if rate_limit and rate_limit["remaining"] == 0:
         error_message = f"GitHub API rate limit reached. Please try again in about {rate_limit['reset_minutes']} minutes."
 
     context = {
-    "section": "profile",
-    "username": username,
-    "profile": profile,
-    "profile_stats": profile_stats,
-    "error_message": error_message,
-    "rate_limit": rate_limit,
+        "section": "profile",
+        "username": username,
+        "profile": profile,
+        "profile_stats": profile_stats,
+        "error_message": error_message,
+        "rate_limit": rate_limit,
+        "is_saved": is_saved,
     }
 
     return render(request, "explorer/profile.html", context)
@@ -184,22 +190,25 @@ def save_profile_view(request, username):
         github_created_at = parse_datetime(profile.get("created_at"))
 
     # Create the profile if it does not exist, update it if it exists
-    SavedGitHubProfile.objects.update_or_create(
-        login=profile.get("login"),
-        defaults={
-            "avatar_url": profile.get("avatar_url"),
-            "name": profile.get("name"),
-            "bio": profile.get("bio"),
-            "location": profile.get("location"),
-            "followers": profile.get("followers") or 0,
-            "following": profile.get("following") or 0,
-            "public_repos": profile.get("public_repos") or 0,
-            "github_created_at": github_created_at,
-            "html_url": profile.get("html_url"),
+    saved_profile, created = SavedGitHubProfile.objects.update_or_create(
+    login=profile.get("login"),
+    defaults={
+        "avatar_url": profile.get("avatar_url"),
+        "name": profile.get("name"),
+        "bio": profile.get("bio"),
+        "location": profile.get("location"),
+        "followers": profile.get("followers") or 0,
+        "following": profile.get("following") or 0,
+        "public_repos": profile.get("public_repos") or 0,
+        "github_created_at": github_created_at,
+        "html_url": profile.get("html_url"),
         }
     )
 
-    messages.success(request, f"{profile.get('login')} was saved in the database.")
+    if created:
+        messages.success(request, f"{profile.get('login')} was saved in the database.")
+    else:
+        messages.success(request, f"{profile.get('login')} was updated in the database.")
 
     return redirect("profile", username=profile.get("login"))
 def saved_profiles_view(request):
