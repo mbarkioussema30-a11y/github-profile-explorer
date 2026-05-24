@@ -202,3 +202,31 @@ def save_profile_view(request, username):
     messages.success(request, f"{profile.get('login')} was saved in the database.")
 
     return redirect("profile", username=profile.get("login"))
+def saved_profiles_view(request):
+    # Get all saved GitHub profiles from the database
+    saved_profiles = SavedGitHubProfile.objects.all().order_by("-saved_at")
+
+    context = {
+        "saved_profiles": saved_profiles,
+    }
+
+    return render(request, "explorer/saved_profiles.html", context)
+def delete_saved_profile_view(request, username):
+    # Only POST requests can delete data
+    if request.method != "POST":
+        return redirect("saved_profiles")
+
+    try:
+        # Find the saved profile by GitHub username
+        saved_profile = SavedGitHubProfile.objects.get(login=username)
+
+        # Delete the saved profile from the database
+        saved_profile.delete()
+
+        messages.success(request, f"{username} was deleted from the database.")
+
+    except SavedGitHubProfile.DoesNotExist:
+        # If the profile does not exist, show an error message
+        messages.error(request, "Saved profile not found.")
+
+    return redirect("saved_profiles")

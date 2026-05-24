@@ -1,5 +1,6 @@
 from django.test import TestCase
 from unittest.mock import patch
+from .models import SavedGitHubProfile
 
 from .utils import calculate_language_percentages, parse_github_link_header
 
@@ -86,3 +87,29 @@ class ViewTests(TestCase):
         self.assertContains(response, "The Octocat")
         self.assertContains(response, "octocat")
         self.assertContains(response, "View public repositories")
+class DatabaseTests(TestCase):
+    def test_saved_github_profile_can_be_created(self):
+        # Test if a GitHub profile can be saved in the database
+        profile = SavedGitHubProfile.objects.create(
+            login="octocat",
+            avatar_url="https://example.com/avatar.png",
+            name="The Octocat",
+            bio="GitHub mascot",
+            location="GitHub",
+            followers=100,
+            following=10,
+            public_repos=8,
+            html_url="https://github.com/octocat",
+        )
+
+        self.assertEqual(profile.login, "octocat")
+        self.assertEqual(profile.name, "The Octocat")
+        self.assertEqual(profile.followers, 100)
+        self.assertEqual(str(profile), "octocat")
+
+    def test_saved_github_profile_login_is_unique(self):
+        # Test that the same GitHub username cannot be saved twice
+        SavedGitHubProfile.objects.create(login="octocat")
+
+        with self.assertRaises(Exception):
+            SavedGitHubProfile.objects.create(login="octocat")
