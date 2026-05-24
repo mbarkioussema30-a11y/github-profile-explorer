@@ -119,14 +119,27 @@
         </p>
 
         {% if language_breakdown %}
-            <div class="language-card" style="margin-bottom: 30px;">
+            <div class="language-card language-breakdown-card">
                 <h2>Language Breakdown</h2>
 
                 {% for item in language_breakdown %}
-                    <p>
-                        <strong>{{ item.language }}:</strong>
-                        {{ item.percentage }}%
-                    </p>
+                    <div class="language-row">
+
+                        <div class="language-row-header">
+                            <span class="language-name">
+                                {{ item.language }}
+                            </span>
+
+                            <span class="language-percentage">
+                                {{ item.percentage }}%
+                            </span>
+                        </div>
+
+                        <div class="language-bar">
+                            <div class="language-bar-fill" style="width: {{ item.percentage }}%;"></div>
+                        </div>
+
+                    </div>
                 {% endfor %}
             </div>
         {% endif %}
