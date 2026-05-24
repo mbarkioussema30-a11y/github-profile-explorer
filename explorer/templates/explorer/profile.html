@@ -210,9 +210,9 @@
 
     {% elif section == "followers" %}
 
-        <p>
-            <a href="{% url 'profile' username %}">← Back to profile</a>
-        </p>
+        <a class="back-link" href="{% url 'profile' username %}">
+            ← Back to profile
+        </a>
 
         {% if followers %}
             <div class="followers-grid modern-followers-grid">
