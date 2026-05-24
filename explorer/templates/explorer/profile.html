@@ -37,68 +37,77 @@
     {% if section == "profile" %}
 
         {% if profile %}
-            <div class="profile-card">
+            <div class="profile-card modern-profile-card">
 
-                <img class="avatar" src="{{ profile.avatar_url }}" alt="GitHub avatar">
+                <div class="profile-header">
 
-                <h2 style="text-align: center;">
-                    {{ profile.name|default:profile.login }}
-                </h2>
+                    <img class="avatar profile-avatar" src="{{ profile.avatar_url }}" alt="GitHub avatar">
 
-                <p>
-                    <strong>Username:</strong>
-                    {{ profile.login }}
-                </p>
+                    <h2>
+                        {{ profile.name|default:profile.login }}
+                    </h2>
 
-                <p>
-                    <strong>Bio:</strong>
-                    {{ profile.bio|default:"No bio available" }}
-                </p>
-
-                <p>
-                    <strong>Location:</strong>
-                    {{ profile.location|default:"No location available" }}
-                </p>
-
-                {% for stat in profile_stats %}
-                    <p>
-                        <strong>{{ stat.label }}:</strong>
-                        {{ stat.value }}
+                    <p class="profile-username">
+                        @{{ profile.login }}
                     </p>
-                {% endfor %}
 
-                <p>
-                    <strong>Joined GitHub:</strong>
-                    {{ profile.created_at }}
-                </p>
+                    <p class="profile-bio">
+                        {{ profile.bio|default:"No bio available" }}
+                    </p>
 
-                <p>
-                    <a href="{{ profile.html_url }}" target="_blank">
-                        View profile on GitHub
-                    </a>
-                </p>
-                
+                    <p class="profile-location">
+                        📍 {{ profile.location|default:"No location available" }}
+                    </p>
 
-                <p>
-                    <a href="{% url 'repos' profile.login %}">
-                        View public repositories
-                    </a>
-                </p>
-
-                <p>
-                    <a href="{% url 'followers' profile.login %}">
-                        View followers
-                    </a>
-                </p>
-                <div class="save-button-wrapper">
-                <form method="post" action="{% url 'save_profile' profile.login %}" class="save-profile-form">
-                    {% csrf_token %}
-
-                    <button type="submit" class="save-button">
-                        Save in DB
-                    </button>
-                </form>
                 </div>
+
+                <div class="stats-grid">
+                    {% for stat in profile_stats %}
+                        <div class="stat-card">
+                            <span class="stat-value">
+                                {{ stat.value }}
+                            </span>
+
+                            <span class="stat-label">
+                                {{ stat.label }}
+                            </span>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="profile-meta">
+                    <p>
+                        <strong>Joined GitHub:</strong>
+                        {{ profile.created_at }}
+                    </p>
+                </div>
+
+                <div class="profile-actions">
+
+                    <a href="{{ profile.html_url }}" target="_blank" class="action-button secondary-button">
+                        View on GitHub
+                    </a>
+
+                    <a href="{% url 'repos' profile.login %}" class="action-button secondary-button">
+                        Repositories
+                    </a>
+
+                    <a href="{% url 'followers' profile.login %}" class="action-button secondary-button">
+                        Followers
+                    </a>
+
+                </div>
+
+                <div class="save-button-wrapper">
+                    <form method="post" action="{% url 'save_profile' profile.login %}" class="save-profile-form">
+                        {% csrf_token %}
+
+                        <button type="submit" class="save-button">
+                            Save Profile
+                        </button>
+                    </form>
+                </div>
+
             </div>
         {% endif %}
 
