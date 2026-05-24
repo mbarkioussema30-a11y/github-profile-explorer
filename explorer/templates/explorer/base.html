@@ -14,6 +14,7 @@
     </title>
 
     <link rel="stylesheet" href="{% static 'explorer/css/style.css' %}">
+    <script src="{% static 'explorer/js/theme.js' %}" defer></script>
 </head>
 <body>
 
@@ -24,6 +25,10 @@
                 <span class="brand-icon">⌘</span>
                 GitHub Explorer
             </a>
+
+            <button type="button" class="theme-toggle" id="themeToggle">
+                Dark Mode
+            </button>
 
             <span class="topbar-badge">
                 Django + GitHub API

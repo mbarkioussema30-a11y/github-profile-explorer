@@ -735,10 +735,13 @@ a:hover {
 }
 
 .language-percentage {
-    font-weight: 800;
-    color: #0969da;
+    font-weight: 900;
+    color: #f97316;
+    background: transparent;
+    border: none;
+    padding: 0;
+    border-radius: 0;
 }
-
 .language-bar {
     width: 100%;
     height: 12px;
@@ -1054,4 +1057,392 @@ a:hover {
     color: white;
     text-decoration: none;
     transform: translateY(-2px);
+}
+/* =========================
+   Strong Dark Mode Overrides
+========================= */
+
+body.dark-mode {
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 100%) !important;
+    color: #e6edf3 !important;
+}
+
+body.dark-mode .topbar,
+body.dark-mode .container,
+body.dark-mode .search-card,
+body.dark-mode .profile-card,
+body.dark-mode .modern-profile-card,
+body.dark-mode .repo-card,
+body.dark-mode .language-card,
+body.dark-mode .follower-card,
+body.dark-mode .modern-follower-card,
+body.dark-mode .saved-card,
+body.dark-mode .improved-saved-card,
+body.dark-mode .feature-card,
+body.dark-mode .saved-profiles-cta {
+    background: #161b22 !important;
+    border-color: #30363d !important;
+    color: #e6edf3 !important;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode strong,
+body.dark-mode .brand,
+body.dark-mode .profile-header h2,
+body.dark-mode .follower-username,
+body.dark-mode .language-name {
+    color: #e6edf3 !important;
+}
+
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode .search-description,
+body.dark-mode .profile-bio,
+body.dark-mode .profile-username,
+body.dark-mode .profile-location,
+body.dark-mode .small-info,
+body.dark-mode .saved-login,
+body.dark-mode .saved-date,
+body.dark-mode .footer {
+    color: #8b949e !important;
+}
+
+body.dark-mode input {
+    background: #0d1117 !important;
+    color: #e6edf3 !important;
+    border-color: #30363d !important;
+}
+
+body.dark-mode input::placeholder {
+    color: #8b949e !important;
+}
+
+body.dark-mode .topbar-badge,
+body.dark-mode .back-link,
+body.dark-mode .rate-limit,
+body.dark-mode .profile-meta,
+body.dark-mode .stat-card,
+body.dark-mode .saved-stats span,
+body.dark-mode .saved-actions a,
+body.dark-mode .example-users a,
+body.dark-mode .pagination a,
+body.dark-mode .pagination span,
+body.dark-mode .secondary-button {
+    background: #0d1117 !important;
+    border-color: #30363d !important;
+    color: #8b949e !important;
+}
+
+body.dark-mode a {
+    color: #58a6ff !important;
+}
+
+body.dark-mode .theme-toggle {
+    background: #f0f6fc !important;
+    color: #0d1117 !important;
+    border-color: #f0f6fc !important;
+}
+
+body.dark-mode .brand-icon {
+    background: #f0f6fc !important;
+    color: #0d1117 !important;
+}
+
+body.dark-mode .language-bar {
+    background: #30363d !important;
+}
+
+body.dark-mode .language-percentage {
+    color: #facc15 !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+}
+/* =========================
+   Dark mode button readability fixes
+========================= */
+
+body.dark-mode button,
+body.dark-mode .saved-profiles-button,
+body.dark-mode .action-button,
+body.dark-mode .secondary-button,
+body.dark-mode .follower-button,
+body.dark-mode .saved-actions a,
+body.dark-mode .example-users a,
+body.dark-mode .pagination a {
+    background: #238636 !important;
+    color: #ffffff !important;
+    border-color: #2ea043 !important;
+}
+
+body.dark-mode button:hover,
+body.dark-mode .saved-profiles-button:hover,
+body.dark-mode .action-button:hover,
+body.dark-mode .secondary-button:hover,
+body.dark-mode .follower-button:hover,
+body.dark-mode .saved-actions a:hover,
+body.dark-mode .example-users a:hover,
+body.dark-mode .pagination a:hover {
+    background: #2ea043 !important;
+    color: #ffffff !important;
+    border-color: #3fb950 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(46, 160, 67, 0.28);
+}
+/* Keep theme toggle readable and separate */
+body.dark-mode .theme-toggle {
+    background: #f0f6fc !important;
+    color: #0d1117 !important;
+    border-color: #f0f6fc !important;
+}
+
+body.dark-mode .theme-toggle:hover {
+    background: #d8dee4 !important;
+    color: #0d1117 !important;
+    border-color: #d8dee4 !important;
+}
+/* =========================
+   Dark mode hover effects
+========================= */
+
+body.dark-mode .repo-card:hover,
+body.dark-mode .modern-follower-card:hover,
+body.dark-mode .saved-card:hover,
+body.dark-mode .feature-card:hover,
+body.dark-mode .stat-card:hover {
+    transform: translateY(-5px);
+    border-color: #58a6ff !important;
+    box-shadow: 0 16px 36px rgba(88, 166, 255, 0.20) !important;
+}
+
+body.dark-mode .repo-card:hover h2,
+body.dark-mode .saved-card:hover h2,
+body.dark-mode .feature-card:hover h2 {
+    color: #58a6ff !important;
+}
+/* =========================
+   Repo info readability
+========================= */
+
+.repo-card .small-info {
+    color: #57606a;
+    background: #f6f8fa;
+    border: 1px solid #d0d7de;
+    font-weight: 700;
+}
+
+body.dark-mode .repo-card .small-info {
+    background: #0d1117 !important;
+    color: #f0f6fc !important;
+    border-color: #58a6ff !important;
+    font-weight: 800;
+    box-shadow: 0 8px 22px rgba(88, 166, 255, 0.10);
+}
+/* =========================
+   Saved date readability
+========================= */
+
+.saved-date {
+    color: #57606a;
+    background: #f6f8fa;
+    border: 1px solid #d0d7de;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+body.dark-mode .saved-date {
+    background: #0d1117 !important;
+    color: #f0f6fc !important;
+    border-color: #58a6ff !important;
+    font-weight: 800;
+    font-size: 14px;
+    box-shadow: 0 8px 22px rgba(88, 166, 255, 0.10);
+}
+/* =========================
+   Saved profile stats readability
+========================= */
+
+body.dark-mode .saved-stats span {
+    background: #0d1117 !important;
+    color: #f0f6fc !important;
+    border-color: #30363d !important;
+    font-weight: 800;
+}
+
+body.dark-mode .saved-stats span:hover {
+    border-color: #58a6ff !important;
+    color: #58a6ff !important;
+}
+/* =========================
+   Dark mode saved DB text readability
+========================= */
+
+body.dark-mode .saved-page-header p,
+body.dark-mode .saved-count-badge,
+body.dark-mode .saved-badge {
+    color: #f0f6fc !important;
+    font-weight: 800;
+}
+
+body.dark-mode .saved-count-badge,
+body.dark-mode .saved-badge {
+    background: #0d1117 !important;
+    border-color: #58a6ff !important;
+    box-shadow: 0 8px 22px rgba(88, 166, 255, 0.14);
+}
+/* =========================
+   Make success messages look like saved badge
+========================= */
+
+.message.success {
+    width: fit-content;
+    margin: 0 auto 24px auto;
+    padding: 12px 18px;
+    border-radius: 999px;
+    color: #1a7f37;
+    background: #dafbe1;
+    border: 1px solid #8ddb8c;
+    font-weight: 800;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(31, 136, 61, 0.12);
+}
+
+body.dark-mode .message.success {
+    color: #f0f6fc !important;
+    background: #0d1117 !important;
+    border-color: #58a6ff !important;
+    box-shadow: 0 8px 22px rgba(88, 166, 255, 0.14);
+}
+/* =========================
+   Profile dark mode readability improvements
+========================= */
+
+body.dark-mode .profile-username {
+    color: #58a6ff !important;
+    font-weight: 900;
+}
+
+body.dark-mode .profile-bio {
+    color: #f0f6fc !important;
+    font-weight: 600;
+}
+
+body.dark-mode .profile-location {
+    color: #3fb950 !important;
+    font-weight: 900;
+}
+
+body.dark-mode .stat-value {
+    color: #58a6ff !important;
+    font-weight: 900;
+}
+
+body.dark-mode .stat-label {
+    color: #f0f6fc !important;
+    font-weight: 800;
+}
+
+body.dark-mode .profile-meta {
+    background: #0d1117 !important;
+    border-color: #30363d !important;
+    box-shadow: none !important;
+}
+
+body.dark-mode .profile-meta p {
+    color: #f0f6fc !important;
+    font-weight: 700;
+}
+
+body.dark-mode .profile-meta strong {
+    color: #ffffff !important;
+}
+
+body.dark-mode .profile-meta p,
+body.dark-mode .profile-meta span {
+    color: #f0f6fc !important;
+}
+/* =========================
+   Back buttons consistent style
+========================= */
+
+.back-link {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: #f6f8fa;
+    color: #0969da;
+    border: 1px solid #d0d7de;
+    font-weight: 900;
+    transition: 0.2s ease;
+}
+
+.back-link:hover {
+    background: #0969da;
+    color: white;
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(9, 105, 218, 0.20);
+}
+
+body.dark-mode .back-link {
+    background: #0d1117 !important;
+    color: #58a6ff !important;
+    border-color: #58a6ff !important;
+    font-weight: 900;
+}
+
+body.dark-mode .back-link:hover {
+    background: #58a6ff !important;
+    color: #0d1117 !important;
+    border-color: #58a6ff !important;
+    text-decoration: none;
+    box-shadow: 0 8px 22px rgba(88, 166, 255, 0.22);
+}
+/* =========================
+   Profile action buttons dark mode
+========================= */
+
+body.dark-mode .profile-actions .action-button {
+    background: #238636 !important;
+    color: #ffffff !important;
+    border-color: #2ea043 !important;
+    font-weight: 900;
+}
+
+body.dark-mode .profile-actions .action-button:hover {
+    background: #2ea043 !important;
+    color: #ffffff !important;
+    border-color: #3fb950 !important;
+    box-shadow: 0 10px 24px rgba(46, 160, 67, 0.28);
+    transform: translateY(-2px);
+}
+/* =========================
+   Delete button dark mode color
+========================= */
+
+body.dark-mode .delete-button {
+    background: #d1242f !important;
+    color: #ffffff !important;
+    border-color: #f85149 !important;
+    box-shadow: 0 8px 22px rgba(248, 81, 73, 0.28) !important;
+}
+
+body.dark-mode .delete-button:hover {
+    background: #f85149 !important;
+    color: #ffffff !important;
+    border-color: #ff7b72 !important;
+    box-shadow: 0 10px 26px rgba(248, 81, 73, 0.35) !important;
+    transform: translateY(-2px);
+}
+/* =========================
+   Remove saved date glow in dark mode
+========================= */
+
+body.dark-mode .saved-date {
+    background: #0d1117 !important;
+    color: #f0f6fc !important;
+    border-color: #30363d !important;
+    box-shadow: none !important;
 }

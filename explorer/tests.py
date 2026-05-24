@@ -69,6 +69,7 @@ class ViewTests(TestCase):
                 "following": 10,
                 "public_repos": 8,
                 "created_at": "2011-01-25T18:44:36Z",
+                "formatted_created_at": "Jan 25, 2011",
                 "html_url": "https://github.com/octocat",
             },
             None,
@@ -86,7 +87,10 @@ class ViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "The Octocat")
         self.assertContains(response, "octocat")
-        self.assertContains(response, "View public repositories")
+        self.assertContains(response, "Repositories")
+        self.assertContains(response, "Followers")
+        self.assertContains(response, "Saved Profiles")
+        self.assertContains(response, "Save Profile")
 class DatabaseTests(TestCase):
     def test_saved_github_profile_can_be_created(self):
         # Test if a GitHub profile can be saved in the database

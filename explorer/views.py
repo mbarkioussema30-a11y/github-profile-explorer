@@ -206,9 +206,9 @@ def save_profile_view(request, username):
     )
 
     if created:
-        messages.success(request, f"{profile.get('login')} was saved in the database.")
+        messages.success(request, f"✅ {profile.get('login')} was saved in the database.")
     else:
-        messages.success(request, f"{profile.get('login')} was updated in the database.")
+        messages.success(request, f"✅ {profile.get('login')} was updated in the database.")
 
     return redirect("profile", username=profile.get("login"))
 def saved_profiles_view(request):
