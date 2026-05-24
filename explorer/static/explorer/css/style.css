@@ -1019,3 +1019,39 @@ a:hover {
     color: #57606a;
     margin-bottom: 22px;
 }
+/* =========================
+   Saved profiles CTA button
+========================= */
+
+.saved-profiles-cta {
+    max-width: 620px;
+    margin: 24px auto 34px auto;
+    padding: 22px;
+    text-align: center;
+    background: #eef4ff;
+    border: 1px solid #b6d7ff;
+    border-radius: 20px;
+}
+
+.saved-profiles-cta p {
+    margin-top: 0;
+    color: #57606a;
+    font-weight: 700;
+}
+
+.saved-profiles-button {
+    display: inline-block;
+    background: #0969da;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 999px;
+    font-weight: 800;
+    transition: 0.2s ease;
+}
+
+.saved-profiles-button:hover {
+    background: #0757b8;
+    color: white;
+    text-decoration: none;
+    transform: translateY(-2px);
+}

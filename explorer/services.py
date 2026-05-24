@@ -3,7 +3,11 @@ import time
 import logging
 from requests.exceptions import RequestException
 from django.core.cache import cache
-from .utils import parse_github_link_header, calculate_language_percentages
+from .utils import (
+    parse_github_link_header,
+    calculate_language_percentages,
+    format_github_date,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -58,6 +62,7 @@ def get_github_profile(username):
             "following": data.get("following"),
             "public_repos": data.get("public_repos"),
             "created_at": data.get("created_at"),
+            "formatted_created_at": format_github_date(data.get("created_at")),
             "html_url": data.get("html_url"),
         }
 
