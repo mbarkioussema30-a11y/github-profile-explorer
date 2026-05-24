@@ -215,9 +215,15 @@ def saved_profiles_view(request):
     # Get all saved GitHub profiles from the database
     saved_profiles = SavedGitHubProfile.objects.all().order_by("-saved_at")
 
+    # Count how many profiles are saved
+    saved_profiles_count = saved_profiles.count()
+
     context = {
         "saved_profiles": saved_profiles,
+        "saved_profiles_count": saved_profiles_count,
     }
+
+    return render(request, "explorer/saved_profiles.html", context)
 
     return render(request, "explorer/saved_profiles.html", context)
 def delete_saved_profile_view(request, username):

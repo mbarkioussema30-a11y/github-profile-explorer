@@ -948,3 +948,74 @@ a:hover {
         grid-template-columns: 1fr;
     }
 }
+/* =========================
+   Improved Saved Profiles page
+========================= */
+
+.saved-page-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.saved-page-header p {
+    color: #57606a;
+    margin-bottom: 16px;
+}
+
+.saved-count-badge {
+    display: inline-block;
+    background: #eef4ff;
+    color: #0969da;
+    border: 1px solid #b6d7ff;
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-weight: 800;
+}
+
+.improved-saved-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.improved-saved-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.saved-card-top {
+    text-align: center;
+}
+
+.saved-login {
+    color: #57606a;
+    font-weight: 800;
+    margin-top: -4px;
+}
+
+.saved-date {
+    color: #57606a;
+    font-size: 13px;
+    background: #f6f8fa;
+    border: 1px solid #d0d7de;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+.improved-saved-actions {
+    margin-top: 12px;
+}
+
+.improved-empty-state {
+    max-width: 620px;
+    margin: 32px auto 0 auto;
+    text-align: center;
+}
+
+.improved-empty-state h2 {
+    color: #24292f;
+}
+
+.improved-empty-state p {
+    color: #57606a;
+    margin-bottom: 22px;
+}
