@@ -72,21 +72,45 @@ I added a database saving feature using Django models and migrations.
 The app can save a searched GitHub profile into the local SQLite database using a `Save in DB` button. I used `update_or_create()` to prevent duplicate saved profiles and to update existing records when the same profile is saved again.
 
 ---
+## Additional Improvements Added
+
+After completing the main assessment requirements, I added extra improvements to make the project more practical, user-friendly, and visually polished.
+
+### Database and saved profiles improvements
+
+- Added a `Saved Profiles` page to display profiles saved in the local SQLite database.
+- Added a `Save Profile` button on the profile page.
+- Used `update_or_create()` so the app creates a profile if it does not exist and updates it if it already exists.
+- Added an `Already saved in database` indicator when a profile already exists in the database.
+- Changed the button text to `Update Saved Profile` when the profile is already saved.
+- Added a `Delete from DB` button to remove saved profiles from the database.
+- Added success messages to inform the user when a profile is saved, updated, or deleted.
+
+### Frontend and UX improvements
+
+- Improved the search page with a cleaner layout, clickable example usernames, and a button to view saved profiles.
+- Improved the profile page with a modern profile card, avatar, profile details, statistics cards, and clearer action buttons.
+- Improved the repositories page with language breakdown progress bars.
+- Improved the followers page with modern follower cards and responsive layout.
+- Improved the saved profiles page with profile cards, saved count, saved date, and action buttons.
+- Added better date formatting for GitHub account creation dates and saved profile dates.
+- Added consistent navigation buttons such as `Back to search` and `Back to profile`.
+
+### Dark mode improvements
+
+- Added a Dark Mode / Light Mode toggle using JavaScript.
+- Used `localStorage` so the selected theme remains active after refreshing the page.
+- Improved dark mode readability for buttons, profile information, repository information, saved profile cards, messages, and dates.
+- Polished button colors so dangerous actions like `Delete from DB` stay red while normal actions stay green.
 
 ## What I Would Improve With More Time
 
 - Add GitHub Personal Access Token support to increase the API rate limit.
-- Improve the visual design further with more responsive components and better UI details.
-- Add more tests for repositories, followers, pagination, and API error cases.
-- Add better date formatting for the GitHub join date.
-- Cache more API responses, such as profile data and repository lists.
-- Add a dark mode toggle.
-- Add a comparison page to compare two GitHub users.
-- Improve performance when calculating language breakdown for users with many repositories.
-- Add a page to list all saved GitHub profiles from the database.
-- Add a delete button to remove saved profiles from the database.
+- Add more tests for repositories, followers, pagination, saved profiles, delete action, and API error cases.
 - Add a detail page for saved profiles.
+- Add search and filtering inside the saved profiles page.
 - Replace SQLite with PostgreSQL for production deployment.
+- Split the CSS into smaller files such as `base.css`, `components.css`, `pages.css`, and `dark-mode.css` for better maintainability.
 
 ---
 
